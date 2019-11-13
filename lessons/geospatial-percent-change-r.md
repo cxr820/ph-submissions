@@ -65,9 +65,9 @@ In the past several years, the city of Miami, Florida, has undergone massive cha
 
 ## Obtaining the Data
 
-This lesson uses geospatial data (shapefiles) and tabular data (.csv files). The two shapefiles contain the Census Tracts of the State of Florida and the internal municipal boundaries of Miami Dade County, including the city of Miami. The .csv files contain data obtained by the CDC using small area estimation methods for 27 chronic disease measures for the 500 largest American cities from 2016, 2017, and 2018.
+This lesson uses geospatial data (shapefiles) and tabular data (.csv files). The two shapefiles contain the Census Tracts of the State of Florida and the internal municipal boundaries of Miami Dade County, including the city of Miami. The .csv files contain data obtained by the CDC using [small area estimation methods](https://www.cdc.gov/500cities/methodology.htm) for 27 chronic disease measures for the 500 largest American cities from 2016, 2017, and 2018.
 
-For this lesson to be successful, you should first download the file [City_Miami.zip](/assets/geospatial-percent-change-r/City_Miami.zip) and extract the contents to “c:\temp\City_Miami”.
+For this lesson to be successful, you should first download the file [City_Miami.zip](/assets/geospatial-percent-change-r/City_Miami.zip) and extract the contents to “c:\temp\City_Miami”. If you are using a Mac computer, extract the file to an equivalent directory such as "~/Users/Desktop/City_Miami" and be aware that your working directory should be set to this folder.
 
 For reference, the Census tract file for this lesson is available for download from the [Census website](https://www2.census.gov/geo/tiger/GENZ2017/shp/). The Miami-Dade County Municipal Coastal Boundary data is freely available from [arcgis.com](https://gis-mdc.opendata.arcgis.com/datasets/municipal-boundary). Please note that these files are prone to change and may not be the same as the lesson files. For this reason, we recommend using the lesson files in the .zip file.
 
@@ -75,7 +75,7 @@ If you need to know more about the health variables included in the .csv files y
 
 ## Procedure
 
-Before starting with this section be sure to have downloaded and extracted all files from the [City_Miami.zip](/assets/geospatial-percent-change-r/City_Miami.zip) file to folder "c:\temp\City_Miami," or an equivalent directory for Mac, Linux, or Unix.
+Before starting with this section be sure to have followed the steps in the previous section and properly downloaded and extracted the data files as instructed.
 
 ### Setting the working directory
 
@@ -83,9 +83,10 @@ The way file directories are specified in R can vary from Windows to Linux\Mac t
 
 In R, you can use the getwd() command to view your working directory, or the setwd() command to set your working directory. For more information, you can access the help file for getwd() and setwd() by running ?getwd() from the R terminal.
 
-Set the working directory to the folder containing all data:
+Depending on your operating system, set the working directory to the folder containing all data:
 
-```setwd("c:\\temp\\City_Miami")```
+Windows: ```setwd("c:\\temp\\City_Miami")```
+Mac: ```setwd("~/Users/Desktop/City_Miami")```
 
 ### Loading polygon shapefile for Florida Census Tracts (2017)
 
@@ -166,11 +167,12 @@ To examine the contents of the object “FLCT_2017_p” in a spreadsheet-style w
 
 Note that there are several slots within the object FLCT_2017_p: "Data", "Polygons", and "Projection". If we expand the "Data" slot, we obtain a list of the non-spatial attributes imported with the shapefile. As you can see, there is no attribute showing to which city each census tract belongs. Because of this we cannot subset the data using a simple selection from the table. We will need to use a second map (shapefile) containing the boundaries of Miami-Dade County. You can now close the data window and go back to the script.
 
-Importing the new boundary shapefile into an object named “MDC_Municipalities”:
+Depending on your operating system, import the new boundary shapefile into an object named “MDC_Municipalities”:
 
-```MDC_Municipalities<- readOGR(dsn = "c:\\temp\\City_Miami", layer = "Municipal_Coastal_Boundary")```
+Windows: ```MDC_Municipalities<- readOGR(dsn = "c:\\temp\\City_Miami", layer = "Municipal_Coastal_Boundary")```
+Mac: ```MDC_Municipalities<- readOGR(dsn = "~/Users/Desktop/City_Miami", layer = "Municipal_Coastal_Boundary")```
 
-Checking if  the map is projected:
+Check if  the map is projected:
 
 ```proj4string(MDC_Municipalities)```
 
